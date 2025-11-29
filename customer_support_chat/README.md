@@ -1,10 +1,10 @@
-# Customer Support Chat Module
-This module powers a customer support chatbot designed to handle various workflows such as flight booking, hotel booking, car rentals, and excursion recommendations. It is structured using design patterns to enable easy maintenance, scalability, and adaptability to future changes. The chatbot's architecture allows for multi-assistant workflows, where each task is handled by a specialized assistant, ensuring a smooth user experience.
+# 客户支持聊天模块
+该模块驱动一个客户支持聊天机器人，旨在处理各种工作流程，如航班预订、酒店预订、汽车租赁和短途旅行推荐。它使用设计模式构建，以实现易于维护、可扩展性和对未来变化的适应性。聊天机器人的架构允许采用多助手工作流程，其中每个任务由专门的助手处理，确保流畅的用户体验。
 
-The core components include a ```state management system```, tools for interacting with different services, and a ```dynamic graph-based approach``` to managing conversations. Each assistant is designed to focus on a specific task, allowing for modular updates and improvements without affecting the overall system.
+核心组件包括 ```状态管理系统```、用于与不同服务交互的工具，以及用于管理对话的 ```基于动态图的方法```。每个助手都旨在专注于特定任务，允许在不影响整个系统的情况下进行模块化更新和改进。
 
 
-## Structure
+## 结构
 ```
 customer_support_chat
 ├── README.md
@@ -51,43 +51,43 @@ customer_support_chat
 10 directories, 32 files
 ```
 
-## Design
-This module has been designed to function as a Python package, making it suitable for integration into larger platforms or automation frameworks like Airflow, Kubernetes, or CI/CD pipelines. The modular approach ensures that specific assistants or tools can be reused, adapted, or extended to meet evolving business requirements. Whether you need to add new booking services, update the interaction flow, or introduce new integrations, the underlying architecture supports these changes with minimal effort.
+## 设计
+该模块被设计为作为一个 Python 包运行，使其适合集成到更大的平台或自动化框架中，如 Airflow、Kubernetes 或 CI/CD 管道。模块化方法确保特定的助手或工具可以被重用、调整或扩展，以满足不断变化的业务需求。无论您是需要添加新的预订服务、更新交互流程还是引入新的集成，底层架构都支持以最小的努力进行这些更改。
 
 
-## Overview of the Customer Support Chat Module
-The customer_support_chat module orchestrates a multi-agent system that handles various customer support tasks, such as booking flights, car rentals, hotels, and excursions. The system uses LangChain and LangGraph to build flexible workflows and assistants, allowing for efficient task delegation. Each assistant follows the same design pattern, making the system scalable and easy to extend with new assistants.
+## 客户支持聊天模块概述
+customer_support_chat 模块编排了一个多智能体系统，处理各种客户支持任务，如预订航班、汽车租赁、酒店和短途旅行。该系统使用 LangChain 和 LangGraph 构建灵活的工作流程和助手，允许高效的任务委派。每个助手遵循相同的设计模式，使系统具有可扩展性，并易于使用新助手进行扩展。
 
-This section dives deeper into the main components of the system and their purpose.
+本节深入探讨系统的主要组件及其用途。
 
-## Main Files Overview
+## 主要文件概述
 - ```assistant_base.py```
-This file is the base structure for all specialized assistants and implements the Strategy Pattern. It provides a common framework that all assistants, such as flight booking or car rental, use to interact with the system.
+此文件是所有专用助手的基本结构，并实现了策略模式。它提供了一个通用框架，所有助手（如航班预订或汽车租赁）都使用该框架与系统交互。
 
--   ```Assistant Class```: Manages the core logic of how the assistants process tasks and user inputs. It ensures that tasks are completed or escalated when necessary.
--   ```CompleteOrEscalate Tool```: This tool is used by assistants to either complete the current task or escalate it to the primary assistant if further actions are needed.
-- This file serves as the backbone of all assistant logic, ensuring consistency across different workflows.
+-   ```Assistant Class```: 管理助手如何处理任务和用户输入的核心逻辑。它确保任务在必要时完成或升级。
+-   ```CompleteOrEscalate Tool```: 助手使用此工具来完成当前任务，或者如果需要进一步操作，则将其升级到主助手。
+- 此文件充当所有助手逻辑的骨干，确保不同工作流程之间的一致性。
 
 - ```primary_assistant.py```
-This file defines the Primary Assistant, which acts as a supervisor, delegating tasks to specialized assistants.
+此文件定义了主助手，它充当主管，将任务委派给专用助手。
 
-- ```Task Delegation Tools```: Models like ToFlightBookingAssistant, ToBookCarRental, etc., help route tasks to specialized assistants based on the user’s needs.
-- ```primary_assistant_runnable```: Combines the primary prompt and tools to handle general inquiries. If the request involves specialized tasks, it delegates them to the appropriate assistant.
-- This assistant follows the Chain of Responsibility Pattern, allowing for seamless delegation without exposing the underlying assistant structure to the user.
+- ```Task Delegation Tools```: 像 ToFlightBookingAssistant、ToBookCarRental 等模型有助于根据用户需求将任务路由到专用助手。
+- ```primary_assistant_runnable```: 结合主提示和工具来处理一般查询。如果请求涉及专门的任务，它会将其委派给适当的助手。
+- 此助手遵循责任链模式，允许无缝委派，而无需向用户公开底层助手结构。
 
 - ```main.py```
-This file serves as the main orchestrator of the system. It sets up the environment, manages user input, and interacts with the graph to execute tasks.
+此文件充当系统的主要协调者。它设置环境，管理用户输入，并与图交互以执行任务。
 
-- ```Graph Visualization```: The graph is generated and saved as an image for visual debugging and analysis.
-- ```Interaction Loop```: The system enters a loop where it continuously listens for user inputs, processes them, and streams the responses from the graph.
-- ```Interrupt Handling```: If the system requires sensitive actions like modifying bookings, it asks the user for confirmation, ensuring control over critical tasks.
+- ```Graph Visualization```: 生成图并将其保存为图像，以便进行可视化调试和分析。
+- ```Interaction Loop```: 系统进入一个循环，不断监听用户输入，处理它们，并从图中流式传输响应。
+- ```Interrupt Handling```: 如果系统需要敏感操作（如修改预订），它会要求用户确认，确保对关键任务的控制。
 
 - ```graph.py```
-This file constructs the multi-agent workflow graph, where each assistant is represented as a sub-graph.
+此文件构建多智能体工作流图，其中每个助手都表示为一个子图。
 
-- ```Node Definitions```: Each assistant has its own entry, processing, and exit nodes that manage the task lifecycle.
-- ```Routing Logic```: The system routes tasks to the relevant assistant based on the user's input and the tools needed to complete the task.
-- ```Primary Assistant```: Handles general tasks and delegates specific ones to specialized assistants such as flight booking, car rentals, hotels, and excursions.
-- ```Interrupt Management```: The graph includes interrupt nodes that pause execution when sensitive tools (like modifying a booking) are invoked, allowing the user to approve or deny actions.
+- ```Node Definitions```: 每个助手都有自己的入口、处理和出口节点，用于管理任务生命周期。
+- ```Routing Logic```: 系统根据用户输入和完成任务所需的工具，将任务路由到相关助手。
+- ```Primary Assistant```: 处理一般任务，并将特定任务委派给专用助手，如航班预订、汽车租赁、酒店和短途旅行。
+- ```Interrupt Management```: 该图包括中断节点，当调用敏感工具（如修改预订）时暂停执行，允许用户批准或拒绝操作。
 
-This modular design allows the system to handle complex workflows efficiently while maintaining flexibility to add new capabilities easily. The system architecture makes it ideal for integrating with additional tools and assistants, allowing for scalable customer support automation.
+这种模块化设计允许系统高效处理复杂的工作流程，同时保持灵活性以轻松添加新功能。系统架构使其非常适合与其他工具和助手集成，从而实现可扩展的客户支持自动化。

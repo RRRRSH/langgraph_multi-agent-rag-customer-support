@@ -1,0 +1,33 @@
+{
+  "session_id": "2484b1c4-73b1-40f2-9f1d-ad7fb09919e5",
+  "chat_history": [
+    {
+      "timestamp": "2025-11-29T17:46:43.470625",
+      "user_message": "\u8bf7\u4f60\u7528\u4e2d\u6587\u56de\u7b54\u6211",
+      "ai_response": "\u597d\u7684\uff01\u8bf7\u95ee\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f"
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "\u8bf7\u4f60\u7528\u4e2d\u6587\u56de\u7b54\u6211",
+      "timestamp": "2025-11-29T17:46:38.017791"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "\u597d\u7684\uff01\u8bf7\u95ee\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f",
+      "timestamp": "2025-11-29T17:46:42.555868"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "\u597d\u7684\uff01\u8bf7\u95ee\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f",
+      "timestamp": "2025-11-29T17:46:43.465977"
+    }
+  ],
+  "created_at": "2025-11-29T17:46:38.017197"
+}

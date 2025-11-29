@@ -54,7 +54,6 @@ def search_flights(
 ) -> List[Dict]:
     """Search for flights based on a natural language query."""
     search_results = flights_vectordb.search(query, limit=limit)
-
     flights = []
     for result in search_results:
         payload = result.payload
@@ -72,6 +71,9 @@ def search_flights(
             "chunk": payload["content"],
             "similarity": result.score,
         })
+    if not flights:
+        return [{"message": "No flights found."}]
+    print("Flights found:", flights)
     return flights
 
 @tool

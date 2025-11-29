@@ -10,7 +10,9 @@ class Config:
     
     # Separate embedding API configuration
     EMBEDDING_API_KEY: str = environ.get("EMBEDDING_API_KEY", environ.get("OPENAI_API_KEY"))
-    EMBEDDING_BASE_URL: str = environ.get("EMBEDDING_BASE_URL", "https://api.openai.com/v1")
+    EMBEDDING_BASE_URL: str = environ.get("EMBEDDING_BASE_URL", environ.get("OPENAI_BASE_URL"))
+    EMBEDDING_MODEL: str = environ.get("EMBEDDING_MODEL", "text-embedding-3-small")
+    EMBEDDING_DIMENSIONS: int = int(environ.get("EMBEDDING_DIMENSIONS", "1536"))
     
     # Local embedding configuration
     USE_LOCAL_EMBEDDINGS: bool = environ.get("USE_LOCAL_EMBEDDINGS", "false").lower() == "true"

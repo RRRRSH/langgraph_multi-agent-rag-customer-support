@@ -1,11 +1,10 @@
+# 向量化模块 (Vectorizer Module)
 
-# Vectorizer Module
+本模块负责处理嵌入和向量数据库操作。以下部分概述了该模块的主要组件，该模块的设计考虑了灵活性，利用设计模式以便轻松适应各种向量数据库。该架构支持不同数据库解决方案的直接集成，确保可扩展性和可维护性。通过抽象嵌入生成和文档索引逻辑，可以无缝扩展或修改此模块以适应特定用例或数据库后端，而无需更改核心功能。
 
-This module is responsible for handling embeddings and vector database operations. The following sections outline the main components of the module, which was designed with flexibility in mind, utilizing design patterns to allow easy adaptation to various vector databases. The architecture enables straightforward integration of different database solutions, ensuring scalability and maintainability. By abstracting the embedding generation and document indexing logic, this module can be seamlessly extended or modified to suit specific use cases or database backends without changing the core functionality.
+此外，该模块被设计为作为一个 Python 包运行，允许将其托管在私有存储库中并集成到自动化流程中。这意味着它可以被 Airflow 或其他管道自动化系统等工具利用，作为更大工作流的一部分实现高效的嵌入和向量数据库操作。
 
-Additionally, the module was designed to function as a Python package, allowing it to be hosted in a private repository and integrated into automated processes. This means it can be leveraged by tools like Airflow or other pipeline automation systems, enabling efficient embedding and vector database operations as part of a larger workflow.
-
-## Structure
+## 结构
 ```
 vectorizer
 ├── README.md
@@ -28,62 +27,62 @@ vectorizer
 
 ### 1. `embedding_generator.py`
 
-This file generates embeddings for the input content using the OpenAI API. It handles both single strings and lists of strings as inputs.
+此文件使用 OpenAI API 为输入内容生成嵌入。它处理单个字符串和字符串列表作为输入。
 
-- **Function: `generate_embedding`**
-  - **Input:** `Union[str, List[str]]` - Accepts either a single string or a list of strings.
-  - **Output:** Returns a list of floats (embedding) or a list of lists of floats if a list of strings is provided.
+- **函数: `generate_embedding`**
+  - **输入:** `Union[str, List[str]]` - 接受单个字符串或字符串列表。
+  - **输出:** 返回浮点数列表（嵌入）或浮点数列表的列表（如果提供了字符串列表）。
 
 ### 2. `chunkenizer.py`
 
-This file handles the splitting of large texts into smaller chunks using the `RecursiveCharacterTextSplitter` from LangChain.
+此文件使用 LangChain 的 `RecursiveCharacterTextSplitter` 处理将大文本拆分为较小的块。
 
-- **Function: `recursive_character_splitting`**
-  - **Input:** Text, chunk size, and chunk overlap.
-  - **Output:** Returns chunks of text to be used for further processing or embedding generation.
+- **函数: `recursive_character_splitting`**
+  - **输入:** 文本、块大小和块重叠。
+  - **输出:** 返回文本块，用于进一步处理或嵌入生成。
 
 ### 3. `vectordb.py`
 
-This is the core component of the vectorizer module that handles interactions with Qdrant for storing and retrieving vector embeddings. It also manages SQLite database connections and content formatting.
+这是向量化模块的核心组件，处理与 Qdrant 的交互以存储和检索向量嵌入。它还管理 SQLite 数据库连接和内容格式化。
 
-- **Class: `VectorDB`**
-  - **Methods:**
-    - `__init__`: Initializes the vector DB with table name, collection name, and optionally creates the collection.
-    - `connect_to_qdrant`: Connects to the Qdrant client using the provided settings.
-    - `create_or_clear_collection`: Creates a new collection or clears the existing one.
-    - `format_content`: Formats content for different collection types (car rentals, flights, hotels, etc.).
-    - `generate_embedding_async`: Generates embeddings asynchronously using the OpenAI API.
-    - `create_embeddings_async`: Main function for handling embedding creation for various content types.
-    - `index_regular_docs`: Indexes regular documents from SQLite into Qdrant.
-    - `index_faq_docs`: Handles the FAQ documents and indexes them into Qdrant.
-    - `create_embeddings`: Runs the async process for generating embeddings.
-    - `search`: Performs a vector search on the Qdrant collection.
+- **类: `VectorDB`**
+  - **方法:**
+    - `__init__`: 使用表名、集合名初始化向量数据库，并可选择创建集合。
+    - `connect_to_qdrant`: 使用提供的设置连接到 Qdrant 客户端。
+    - `create_or_clear_collection`: 创建新集合或清除现有集合。
+    - `format_content`: 为不同集合类型（汽车租赁、航班、酒店等）格式化内容。
+    - `generate_embedding_async`: 使用 OpenAI API 异步生成嵌入。
+    - `create_embeddings_async`: 处理各种内容类型的嵌入创建的主要函数。
+    - `index_regular_docs`: 将常规文档从 SQLite 索引到 Qdrant。
+    - `index_faq_docs`: 处理 FAQ 文档并将其索引到 Qdrant。
+    - `create_embeddings`: 运行生成嵌入的异步过程。
+    - `search`: 在 Qdrant 集合上执行向量搜索。
 
-- **Asynchronous Processing:**
-  - Uses `asyncio` and `aiohttp` to handle batch processing of documents and interact with the OpenAI API efficiently.
-  - **Batching:** Chunks are processed in batches to avoid exceeding rate limits.
+- **异步处理:**
+  - 使用 `asyncio` 和 `aiohttp` 处理文档的批处理并高效地与 OpenAI API 交互。
+  - **批处理:** 块被分批处理以避免超过速率限制。
 
 ### 4. `main.py`
 
-This file is responsible for creating and indexing multiple collections (car rentals, trips, flights, hotels, and FAQ) into Qdrant.
+此文件负责创建多个集合（汽车租赁、旅行、航班、酒店和 FAQ）并将其索引到 Qdrant 中。
 
-- **Function: `create_collections`**
-  - Initializes vector DB for each table and collection, generates embeddings, and stores them in Qdrant.
+- **函数: `create_collections`**
+  - 为每个表和集合初始化向量数据库，生成嵌入，并将其存储在 Qdrant 中。
 
 ### 5. `utils.py`
 
-Contains utility functions that support various operations in the module.
+包含支持模块中各种操作的实用函数。
 
-## How to Use
+## 如何使用
 
-1. **Creating Embeddings**:
-   - Run `main.py` to initialize vector databases for the various collections and generate embeddings for them.
-   - Example command: `python main.py`
+1. **创建嵌入**:
+   - 运行 `main.py` 以初始化各种集合的向量数据库并为它们生成嵌入。
+   - 示例命令: `python main.py`
 
-2. **Searching**:
-   - Use the `search` function from `vectordb.py` to perform searches against the indexed embeddings in Qdrant.
+2. **搜索**:
+   - 使用 `vectordb.py` 中的 `search` 函数对 Qdrant 中索引的嵌入执行搜索。
 
-## Notes
+## 注意事项
 
-- Ensure the OpenAI API key is set in the environment variables or through the settings file before running the embedding generation.
-- The `RecursiveCharacterTextSplitter` is used for splitting large pieces of text into manageable chunks to ensure effective embedding generation.
+- 在运行嵌入生成之前，请确保在环境变量或通过设置文件设置了 OpenAI API 密钥。
+- `RecursiveCharacterTextSplitter` 用于将大段文本拆分为可管理的块，以确保有效的嵌入生成。

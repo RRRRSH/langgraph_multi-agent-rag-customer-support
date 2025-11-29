@@ -1,0 +1,46 @@
+{
+  "session_id": "4767661e-0a84-461c-acd2-0215f13a200a",
+  "chat_history": [
+    {
+      "timestamp": "2025-11-29T17:42:39.695852",
+      "user_message": "\u6211\u9700\u8981\u8ba2\u4e00\u4e2a\u822a\u73ed\uff0cLAX|JFK|2025-08-27",
+      "ai_response": "An unexpected error occurred while processing your request. Please try again later."
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "\u6211\u9700\u8981\u8ba2\u4e00\u4e2a\u822a\u73ed\uff0cLAX|JFK|2025-08-27",
+      "timestamp": "2025-11-29T17:42:30.846940"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "\u6211\u770b\u5230\u60a8\u60f3\u8981\u9884\u8ba2\u4ece\u6d1b\u6749\u77f6(LAX)\u5230\u7ebd\u7ea6(JFK)\u7684\u822a\u73ed\uff0c\u65e5\u671f\u662f2025\u5e748\u670827\u65e5\u3002\u8ba9\u6211\u4e3a\u60a8\u641c\u7d22\u53ef\u7528\u7684\u822a\u73ed\u9009\u9879\u3002\n\n",
+      "timestamp": "2025-11-29T17:42:37.450099"
+    },
+    {
+      "type": "tool_call",
+      "title": "search_flights call",
+      "content": "query: LAX to JFK on 2025-08-27",
+      "details": {
+        "tool_name": "search_flights",
+        "tool_call_id": "call_5780152a42eb4505817d3fe5",
+        "parameters": {
+          "query": "LAX to JFK on 2025-08-27"
+        }
+      },
+      "timestamp": "2025-11-29T17:42:39.410464"
+    },
+    {
+      "type": "error",
+      "title": "Processing Error",
+      "content": "Last message is not an AIMessage",
+      "timestamp": "2025-11-29T17:42:39.695514"
+    }
+  ],
+  "created_at": "2025-11-29T17:42:30.846373"
+}

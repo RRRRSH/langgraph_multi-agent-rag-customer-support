@@ -6,6 +6,8 @@ load_dotenv()
 class Config:
     OPENAI_API_KEY: str = environ.get("OPENAI_API_KEY", "")
     OPENAI_BASE_URL: str = environ.get("OPENAI_BASE_URL", "")
+    EMBEDDING_MODEL: str = environ.get("EMBEDDING_MODEL", "text-embedding-3-small")
+    EMBEDDING_DIMENSIONS: int = int(environ.get("EMBEDDING_DIMENSIONS", "1536"))
     
     # Model configuration for cost optimization
     OPENAI_MODEL: str = environ.get("OPENAI_MODEL", "gpt-3.5-turbo")

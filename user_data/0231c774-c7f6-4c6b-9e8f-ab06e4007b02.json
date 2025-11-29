@@ -1,0 +1,46 @@
+{
+  "session_id": "0231c774-c7f6-4c6b-9e8f-ab06e4007b02",
+  "chat_history": [
+    {
+      "timestamp": "2025-11-29T17:40:38.899125",
+      "user_message": "\u6211\u8981\u8ba2\u4e00\u5f2008-27\u4eceLAX\u5230JFK\u7684\u822a\u73ed",
+      "ai_response": "An unexpected error occurred while processing your request. Please try again later."
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "\u6211\u8981\u8ba2\u4e00\u5f2008-27\u4eceLAX\u5230JFK\u7684\u822a\u73ed",
+      "timestamp": "2025-11-29T17:40:30.400131"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "I'll help you search for a flight from LAX to JFK on August 27th. Let me check the available flights for you.\n\n",
+      "timestamp": "2025-11-29T17:40:35.168878"
+    },
+    {
+      "type": "tool_call",
+      "title": "search_flights call",
+      "content": "query: LAX to JFK on 2025-08-27",
+      "details": {
+        "tool_name": "search_flights",
+        "tool_call_id": "call_377024eab5a8491a88c239de",
+        "parameters": {
+          "query": "LAX to JFK on 2025-08-27"
+        }
+      },
+      "timestamp": "2025-11-29T17:40:38.636441"
+    },
+    {
+      "type": "error",
+      "title": "Processing Error",
+      "content": "Last message is not an AIMessage",
+      "timestamp": "2025-11-29T17:40:38.898619"
+    }
+  ],
+  "created_at": "2025-11-29T17:40:30.399003"
+}

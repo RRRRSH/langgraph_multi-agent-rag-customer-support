@@ -1,0 +1,16 @@
+OPENAI_API_KEY=""
+OPENAI_BASE_URL=""
+OPENAI_MODEL="qwen3-max"
+EMBEDDING_MODEL="text-embedding-v2"
+EMBEDDING_DIMENSIONS="1536"
+# 如需配置 LangChain，请添加:
+LANGCHAIN_API_KEY="your_langsmith_api_key" # 可选
+# 如需配置 GoHumanLoop，请添加:
+# GOHUMANLOOP_API_KEY="your_gohumanloop_api_key"
+# 如需配置 QDRANT，请添加:
+QDRANT_URL=""
+QDRANT_KEY=""
+# woocommerce接口相关
+# WOOCOMMERCE_API_URL="your_WOOCOMMERCE_API_URL"
+# WOOCOMMERCE_API_KEY="your_WOOCOMMERCE_API_KEY"
+# WOOCOMMERCE_API_SECRET="your_WOOCOMMERCE_API_SECRET"

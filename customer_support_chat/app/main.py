@@ -60,7 +60,6 @@ def main():
                     if message.id not in printed_message_ids:
                         message.pretty_print()
                         printed_message_ids.add(message.id)
-
             # Check for interrupts
             snapshot = multi_agentic_graph.get_state(config)
             while snapshot.next:

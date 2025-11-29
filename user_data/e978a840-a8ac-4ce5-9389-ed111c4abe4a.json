@@ -1,0 +1,47 @@
+{
+  "session_id": "e978a840-a8ac-4ce5-9389-ed111c4abe4a",
+  "chat_history": [
+    {
+      "timestamp": "2025-11-29T17:14:48.925849",
+      "user_message": "\u6211\u8981\u8ba2\u4e00\u5f20\u53bb\u5df4\u9ece\u7684\u673a\u7968",
+      "ai_response": "An unexpected error occurred while processing your request. Please try again later."
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "\u6211\u8981\u8ba2\u4e00\u5f20\u53bb\u5df4\u9ece\u7684\u673a\u7968",
+      "timestamp": "2025-11-29T17:14:40.813401"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "\u6211\u53ef\u4ee5\u5e2e\u60a8\u67e5\u8be2\u53bb\u5df4\u9ece\u7684\u822a\u73ed\u4fe1\u606f\u3002\u8ba9\u6211\u4e3a\u60a8\u641c\u7d22\u53ef\u7528\u7684\u822a\u73ed\u9009\u9879\u3002\n\n",
+      "timestamp": "2025-11-29T17:14:46.918964"
+    },
+    {
+      "type": "tool_call",
+      "title": "search_flights call",
+      "content": "query: flights to Paris\nlimit: 5",
+      "details": {
+        "tool_name": "search_flights",
+        "tool_call_id": "call_fcbd3c8506e641cba81ab263",
+        "parameters": {
+          "query": "flights to Paris",
+          "limit": 5
+        }
+      },
+      "timestamp": "2025-11-29T17:14:48.777347"
+    },
+    {
+      "type": "error",
+      "title": "Processing Error",
+      "content": "Last message is not an AIMessage",
+      "timestamp": "2025-11-29T17:14:48.925343"
+    }
+  ],
+  "created_at": "2025-11-29T17:14:40.812819"
+}

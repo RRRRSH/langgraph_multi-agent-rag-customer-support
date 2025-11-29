@@ -115,7 +115,7 @@ class VectorDB:
             else:
                 # For API embeddings, use standard OpenAI dimensions
                 # text-embedding-3-small: 1536, text-embedding-3-large: 3072, ada-002: 1536
-                return 1536
+                return settings.EMBEDDING_DIMENSIONS
         except Exception as e:
             logger.warning(f"Could not determine embedding dimensions: {str(e)}")
             logger.info("Defaulting to 1536 dimensions")
@@ -160,12 +160,13 @@ class VectorDB:
         
         # Fix base URL construction for embedding API
         base_url = settings.EMBEDDING_BASE_URL
+        # embedding_url = base_url
         if base_url.endswith("/v1"):
             base_url = base_url[:-3]  # Remove /v1 from the end
         embedding_url = f"{base_url}/v1/embeddings"
         
         # Use text-embedding-3-small consistently for 1536 dimensions
-        model = 'text-embedding-3-small'
+        model = settings.EMBEDDING_MODEL
         
         logger.info(f"Using embedding URL: {embedding_url}")
         logger.info(f"Using model: {model}")
@@ -444,7 +445,8 @@ class VectorDB:
         logger.info(f"✅ Finished indexing {self.collection_name}. Total documents indexed: {total_indexed}")
 
     async def index_faq_docs(self):
-        faq_url = "https://storage.googleapis.com/benchmarks-artifacts/travel-db/swiss_faq.md"
+        # 联网下载 FAQ 文档内容
+        """ faq_url = "https://storage.googleapis.com/benchmarks-artifacts/travel-db/swiss_faq.md"
         
         logger.info(f"📄 Downloading FAQ content from: {faq_url}")
         
@@ -463,7 +465,25 @@ class VectorDB:
                     
             except Exception as e:
                 logger.error(f"💥 Error downloading FAQ: {str(e)}")
-                raise
+                raise """
+        # 本地导入 FAQ 文档内容
+        local_file_path = "faq_documents/swiss_faq.md"
+        
+        logger.info(f"📄 Reading FAQ content from local file: {local_file_path}")
+        
+        try:
+            # 直接读取本地文件
+            if os.path.exists(local_file_path):
+                with open(local_file_path, "r", encoding="utf-8") as f:
+                    faq_text = f.read()
+                logger.info(f"📝 Loaded FAQ content: {len(faq_text)} characters")
+            else:
+                # 如果文件不存在，抛出错误提示
+                raise FileNotFoundError(f"❌ File not found: {local_file_path}. Please download it manually.")
+                
+        except Exception as e:
+            logger.error(f"💥 Error reading FAQ file: {str(e)}")
+            raise
 
         # Split the FAQ into documents first by headers
         initial_docs = [txt.strip() for txt in re.split(r"(?=\n##)", faq_text) if txt.strip()]
@@ -618,6 +638,7 @@ class VectorDB:
         
         # Fix base URL construction for embedding API
         base_url = settings.EMBEDDING_BASE_URL
+        # embedding_url = base_url
         if base_url.endswith("/v1"):
             base_url = base_url[:-3]  # Remove /v1 from the end
         embedding_url = f"{base_url}/v1/embeddings"
@@ -649,6 +670,11 @@ class VectorDB:
         
         # Combine models to try
         models_to_try = []
+
+         # 【新增】优先添加配置文件中指定的模型
+        if settings.EMBEDDING_MODEL:
+            models_to_try.append(settings.EMBEDDING_MODEL)
+        
         
         # Add available models first if we got them
         if available_models:

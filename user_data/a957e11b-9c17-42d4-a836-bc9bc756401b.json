@@ -1,0 +1,33 @@
+{
+  "session_id": "a957e11b-9c17-42d4-a836-bc9bc756401b",
+  "chat_history": [
+    {
+      "timestamp": "2025-11-29T17:47:02.395745",
+      "user_message": "I'd like to order a Flight AA100 from LAX to JFK was scheduled to depart at 2025-08-27",
+      "ai_response": "I notice there might be some confusion in your message. You mentioned wanting to \"order a Flight AA100,\" but then provided details about a flight that appears to be scheduled information.\n\nLet me help clarify your request:\n\n1. Are you trying to **book** a new flight on American Airlines AA100 from LAX to JFK on August 27, 2025?\n2. Are you asking about the **status** of an existing AA100 flight booking?\n3. Or did you mean something else entirely?\n\nAlso, I should mention that based on your current bookings in our system, you have a United Airlines flight (UA500) from JFK to SFO on September 2, 2025, but no American Airlines bookings are showing.\n\nCould you please clarify what you'd like to do with flight AA100?"
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "I'd like to order a Flight AA100 from LAX to JFK was scheduled to depart at 2025-08-27",
+      "timestamp": "2025-11-29T17:46:53.273734"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "I notice there might be some confusion in your message. You mentioned wanting to \"order a Flight AA100,\" but then provided details about a flight that appears to be scheduled information.\n\nLet me help clarify your request:\n\n1. Are you trying to **book** a new flight on American Airlines AA100 from LAX to JFK on August 27, 2025?\n2. Are you asking about the **status** of an existing AA100 flight booking?\n3. Or did you mean something else entirely?\n\nAlso, I should mention that based on your current bookings in our system, you have a United Airlines flight (UA500) from JFK to SFO on September 2, 2025, but no American Airlines bookings are showing.\n\nCould you please clarify what you'd like to do with flight AA100?",
+      "timestamp": "2025-11-29T17:46:58.002967"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "I notice there might be some confusion in your message. You mentioned wanting to \"order a Flight AA100,\" but then provided details about a flight that appears to be scheduled information.\n\nLet me help clarify your request:\n\n1. Are you trying to **book** a new flight on American Airlines AA100 from LAX to JFK on August 27, 2025?\n2. Are you asking about the **status** of an existing AA100 flight booking?\n3. Or did you mean something else entirely?\n\nAlso, I should mention that based on your current bookings in our system, you have a United Airlines flight (UA500) from JFK to SFO on September 2, 2025, but no American Airlines bookings are showing.\n\nCould you please clarify what you'd like to do with flight AA100?",
+      "timestamp": "2025-11-29T17:47:02.392419"
+    }
+  ],
+  "created_at": "2025-11-29T17:46:53.272959"
+}

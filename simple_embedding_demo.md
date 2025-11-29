@@ -1,14 +1,14 @@
-# Simple Embedding Generation Demo
+# 简单嵌入生成演示
 
-This script demonstrates how to generate embeddings using the `text-embedding-3-large` model from OpenAI.
+此脚本演示如何使用 OpenAI 的 `text-embedding-3-large` 模型生成嵌入。
 
-## Prerequisites
+## 先决条件
 
 1.  Python 3.6+
-2.  `openai` Python library (`pip install openai`)
-3.  An OpenAI API key set as the environment variable `OPENAI_API_KEY`.
+2.  `openai` Python 库 (`pip install openai`)
+3.  设置为环境变量 `OPENAI_API_KEY` 的 OpenAI API 密钥。
 
-## Code
+## 代码
 
 ```python
 # simple_embedding_demo.py
@@ -16,11 +16,11 @@ This script demonstrates how to generate embeddings using the `text-embedding-3-
 import os
 from openai import OpenAI
 
-# --- Configuration ---
-# Ensure the OPENAI_API_KEY environment variable is set.
-# You can set it in your terminal like this:
+# --- 配置 ---
+# 确保设置了 OPENAI_API_KEY 环境变量。
+# 您可以在终端中像这样设置它：
 # Linux/macOS: export OPENAI_API_KEY='your-api-key-here'
-# Windows (Command Prompt): set OPENAI_API_KEY=your-api-key-here
+# Windows (命令提示符): set OPENAI_API_KEY=your-api-key-here
 # Windows (PowerShell): $env:OPENAI_API_KEY="your-api-key-here"
 
 API_KEY = os.getenv("OPENAI_API_KEY")
@@ -32,14 +32,14 @@ MODEL_NAME = "text-embedding-3-large"
 
 def generate_embeddings(texts, model=MODEL_NAME):
     """
-    Generates embeddings for a list of texts using the specified model.
+    使用指定模型为文本列表生成嵌入。
 
     Args:
-        texts (list of str): The texts to embed.
-        model (str): The name of the embedding model to use.
+        texts (list of str): 要嵌入的文本。
+        model (str): 要使用的嵌入模型的名称。
 
     Returns:
-        list: A list of embedding vectors.
+        list: 嵌入向量列表。
     """
     client = OpenAI(api_key=API_KEY)
     
@@ -48,17 +48,17 @@ def generate_embeddings(texts, model=MODEL_NAME):
             model=model,
             input=texts
         )
-        # Extract embeddings from the response
+        # 从响应中提取嵌入
         embeddings = [item.embedding for item in response.data]
         return embeddings
     except Exception as e:
         print(f"An error occurred: {e}")
-        raise # Re-raise the exception for debugging
+        raise # 重新引发异常以进行调试
 
 if __name__ == "__main__":
     print(f"Generating embeddings using model: {MODEL_NAME}")
     
-    # Example texts
+    # 示例文本
     texts_to_embed = [
         "The quick brown fox jumps over the lazy dog.",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -72,7 +72,7 @@ if __name__ == "__main__":
         print(f"Dimension of the first embedding: {len(embeddings[0])}")
         print(f"First 5 elements of the first embedding: {embeddings[0][:5]}")
         
-        # Basic check: all embeddings should have the same length
+        # 基本检查：所有嵌入应具有相同的长度
         lengths = [len(e) for e in embeddings]
         if all(l == lengths[0] for l in lengths):
             print(f"All embeddings have consistent dimension: {lengths[0]}")
@@ -84,25 +84,25 @@ if __name__ == "__main__":
 
 ```
 
-## How to Run
+## 如何运行
 
-1.  Save the code above as `simple_embedding_demo.py`.
-2.  Open your terminal or command prompt.
-3.  Set your OpenAI API key:
+1.  将上面的代码保存为 `simple_embedding_demo.py`。
+2.  打开终端或命令提示符。
+3.  设置您的 OpenAI API 密钥：
     ```bash
     export OPENAI_API_KEY='your-actual-openai-api-key-here'
-    # Or on Windows PowerShell:
+    # 或者在 Windows PowerShell 上：
     # $env:OPENAI_API_KEY="your-actual-openai-api-key-here"
     ```
-4.  Navigate to the directory where you saved the file.
-5.  Run the script:
+4.  导航到保存文件的目录。
+5.  运行脚本：
     ```bash
     python simple_embedding_demo.py
     ```
 
-## Expected Output (Format)
+## 预期输出（格式）
 
-The output will vary based on the actual embeddings generated, but it should look similar to this:
+输出将根据实际生成的嵌入而有所不同，但它应该类似于以下内容：
 
 ```
 Generating embeddings using model: text-embedding-3-large

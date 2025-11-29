@@ -1,0 +1,95 @@
+2025-11-28 22:07:14,566 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: ResponseHandlingException: [Errno 111] Connection refused
+2025-11-29 14:26:30,075 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: ResponseHandlingException: [Errno 111] Connection refused
+2025-11-29 15:59:19,408 - vectorizer.app.core.logger - ERROR - All 9 embedding models failed. The API may not support embeddings.
+2025-11-29 15:59:19,408 - vectorizer.app.core.logger - ERROR - Consider using a different API provider or local embedding model.
+2025-11-29 15:59:19,409 - vectorizer.app.core.logger - ERROR - Embedding API connection failed. Please check your configuration.
+2025-11-29 15:59:19,409 - vectorizer.app.core.logger - ERROR - See EMBEDDING_SETUP.md for configuration instructions.
+2025-11-29 16:02:23,003 - vectorizer.app.core.logger - ERROR - 💥 Error downloading FAQ: Cannot connect to host storage.googleapis.com:443 ssl:default [Connection reset by peer]
+2025-11-29 16:02:23,005 - vectorizer.app.core.logger - ERROR - ❌ An error occurred while processing faq: ClientConnectorError: Cannot connect to host storage.googleapis.com:443 ssl:default [Connection reset by peer]
+2025-11-29 16:02:23,005 - vectorizer.app.core.logger - ERROR - Detailed error information:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/connector.py", line 1283, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs, sock=sock)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/asyncio/base_events.py", line 1201, in create_connection
+    transport, protocol = await self._create_connection_transport(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        ssl_shutdown_timeout=ssl_shutdown_timeout)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/asyncio/base_events.py", line 1234, in _create_connection_transport
+    await waiter
+  File "/root/miniconda3/envs/kefu/lib/python3.13/asyncio/selector_events.py", line 980, in _read_ready__get_buffer
+    nbytes = self._sock.recv_into(buf)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/workspaces/langgraph_multi-agent-rag-customer-support/vectorizer/app/main.py", line 46, in create_collections
+    vectordb.create_embeddings()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/root/workspaces/langgraph_multi-agent-rag-customer-support/vectorizer/app/vectordb/vectordb.py", line 614, in create_embeddings
+    asyncio.run(self.create_embeddings_async())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/root/workspaces/langgraph_multi-agent-rag-customer-support/vectorizer/app/vectordb/vectordb.py", line 264, in create_embeddings_async
+    await self.index_faq_docs()
+  File "/root/workspaces/langgraph_multi-agent-rag-customer-support/vectorizer/app/vectordb/vectordb.py", line 454, in index_faq_docs
+    async with session.get(faq_url) as response:
+               ~~~~~~~~~~~^^^^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/client.py", line 1488, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/connector.py", line 1581, in _create_direct_connection
+    raise last_exc
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/connector.py", line 1550, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/root/miniconda3/envs/kefu/lib/python3.13/site-packages/aiohttp/connector.py", line 1291, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host storage.googleapis.com:443 ssl:default [Connection reset by peer]
+2025-11-29 16:36:10,966 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 404 - {'error': {'message': 'The model `text-embedding-3-small` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}, 'request_id': 'f1c1c42a-6f89-4da5-8661-2242a40f46fa'}
+2025-11-29 16:36:10,969 - vectorizer.app.core.logger - ERROR - sentence-transformers not installed. Install with: pip install sentence-transformers
+2025-11-29 16:36:10,969 - vectorizer.app.core.logger - ERROR - Error generating local embeddings: No module named 'sentence_transformers'
+2025-11-29 16:36:10,969 - vectorizer.app.core.logger - ERROR - Local embedding fallback also failed: No module named 'sentence_transformers'
+2025-11-29 16:37:07,933 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 404 - {'error': {'message': 'The model `text-embedding-3-small` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}, 'request_id': '7798f1c5-85a5-471a-be15-18d8f5aa2e2d'}
+2025-11-29 16:37:07,934 - vectorizer.app.core.logger - ERROR - sentence-transformers not installed. Install with: pip install sentence-transformers
+2025-11-29 16:37:07,934 - vectorizer.app.core.logger - ERROR - Error generating local embeddings: No module named 'sentence_transformers'
+2025-11-29 16:37:07,934 - vectorizer.app.core.logger - ERROR - Local embedding fallback also failed: No module named 'sentence_transformers'
+2025-11-29 16:39:29,995 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 400 - {'error': {'message': '<400> InternalError.Algo.InvalidParameter: Value error, contents is neither str nor list of str.: input.contents', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': 'b2db71cc-5404-44a8-8bbb-4257b16f90b2', 'request_id': 'b2db71cc-5404-44a8-8bbb-4257b16f90b2'}
+2025-11-29 16:39:29,996 - vectorizer.app.core.logger - ERROR - sentence-transformers not installed. Install with: pip install sentence-transformers
+2025-11-29 16:39:29,996 - vectorizer.app.core.logger - ERROR - Error generating local embeddings: No module named 'sentence_transformers'
+2025-11-29 16:39:29,997 - vectorizer.app.core.logger - ERROR - Local embedding fallback also failed: No module named 'sentence_transformers'
+2025-11-29 16:42:34,096 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 400 - {'error': {'message': '<400> InternalError.Algo.InvalidParameter: Value error, contents is neither str nor list of str.: input.contents', 'type': 'InvalidParameter', 'param': None, 'code': 'InvalidParameter'}, 'id': '7a27437c-f026-4c04-8d35-7f681d6308e1', 'request_id': '7a27437c-f026-4c04-8d35-7f681d6308e1'}
+2025-11-29 16:42:34,097 - vectorizer.app.core.logger - ERROR - sentence-transformers not installed. Install with: pip install sentence-transformers
+2025-11-29 16:42:34,097 - vectorizer.app.core.logger - ERROR - Error generating local embeddings: No module named 'sentence_transformers'
+2025-11-29 16:42:34,097 - vectorizer.app.core.logger - ERROR - Local embedding fallback also failed: No module named 'sentence_transformers'
+2025-11-29 20:32:39,036 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at https://577eadeb-8f49-4c80-a945-0ca93e4b519e.us-west-1-0.aws.cloud.qdrant.io: ResponseHandlingException: [Errno -2] Name or service not known

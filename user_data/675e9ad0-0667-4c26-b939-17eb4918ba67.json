@@ -1,0 +1,39 @@
+{
+  "session_id": "675e9ad0-0667-4c26-b939-17eb4918ba67",
+  "chat_history": [
+    {
+      "timestamp": "2025-11-29T19:04:58.051439",
+      "user_message": "\u6211\u60f3\u6539\u7b7e\u5230\u540e\u4e00\u5929\uff0c\u4efb\u610f\u65f6\u95f4\u90fd\u884c\uff0c\u76f8\u540c\u7684\u4ed3\u4f4d",
+      "ai_response": "An unexpected error occurred while processing your request. Please try again later."
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "\u6211\u60f3\u6539\u7b7e\u5230\u540e\u4e00\u5929\uff0c\u4efb\u610f\u65f6\u95f4\u90fd\u884c\uff0c\u76f8\u540c\u7684\u4ed3\u4f4d",
+      "timestamp": "2025-11-29T19:04:49.956294"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "\u6211\u770b\u5230\u60a8\u60f3\u8981\u6539\u7b7e\u60a8\u7684\u822a\u73ed\u5230\u540e\u4e00\u5929\u3002\u8ba9\u6211\u5148\u67e5\u770b\u4e00\u4e0b\u60a8\u7684\u5f53\u524d\u9884\u8ba2\u4fe1\u606f\u548c\u53ef\u7528\u7684\u822a\u73ed\u9009\u9879\u3002\n\n",
+      "timestamp": "2025-11-29T19:04:54.812781"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "\u6211\u770b\u5230\u60a8\u5f53\u524d\u9884\u8ba2\u7684\u662fUA500\u822a\u73ed\uff0c\u4eceJFK\u98de\u5f80SFO\uff0c\u65e5\u671f\u662f2025\u5e749\u67082\u65e5\uff0c\u5546\u52a1\u8231\u3002\n\n\u8ba9\u6211\u4e3a\u60a8\u67e5\u627e9\u67083\u65e5\uff08\u540e\u4e00\u5929\uff09\u4eceJFK\u5230SFO\u7684\u5546\u52a1\u8231\u822a\u73ed\u9009\u9879\u3002\n\n",
+      "timestamp": "2025-11-29T19:04:57.505977"
+    },
+    {
+      "type": "error",
+      "title": "Processing Error",
+      "content": "Last message is not an AIMessage",
+      "timestamp": "2025-11-29T19:04:58.051017"
+    }
+  ],
+  "created_at": "2025-11-29T19:04:49.955711"
+}
