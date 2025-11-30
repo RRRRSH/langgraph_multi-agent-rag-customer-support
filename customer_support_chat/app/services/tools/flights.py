@@ -47,6 +47,7 @@ def fetch_user_flight_information(*, config: RunnableConfig) -> List[Dict]:
 
     return results
 
+# 直接搜索向量信息库里的信息
 @tool
 def search_flights(
     query: str,
@@ -57,24 +58,109 @@ def search_flights(
     flights = []
     for result in search_results:
         payload = result.payload
+        
         flights.append({
             "flight_id": payload["flight_id"],
             "flight_no": payload["flight_no"],
-            "departure_airport": payload["departure_airport"],
-            "arrival_airport": payload["arrival_airport"],
+           "departure_airport": payload["departure_airport"],
+           "arrival_airport": payload["arrival_airport"],
             "scheduled_departure": payload["scheduled_departure"],
             "scheduled_arrival": payload["scheduled_arrival"],
             "status": payload["status"],
             "aircraft_code": payload["aircraft_code"],
             "actual_departure": payload["actual_departure"],
             "actual_arrival": payload["actual_arrival"],
-            "chunk": payload["content"],
-            "similarity": result.score,
+            #"chunk": payload["content"],
+            #"similarity": result.score,
         })
     if not flights:
         return [{"message": "No flights found."}]
     print("Flights found:", flights)
     return flights
+
+# 改为结构化查询数据库
+# ...existing code...
+#@tool
+#def search_flights(
+#    departure_airport: Optional[str] = None,
+#    arrival_airport: Optional[str] = None,
+#    start_time: Optional[str] = None,
+#    end_time: Optional[str] = None,
+#    limit: int = 20,
+#) -> List[Dict]:
+#    """Search for flights using structured criteria (airports, dates)."""
+    
+#    # --- 调试打印 ---
+#    print(f"\n[DEBUG] search_flights called with:")
+#    print(f"  departure_airport: {departure_airport}")
+#    print(f"  arrival_airport: {arrival_airport}")
+#    print(f"  start_time: {start_time}")
+#    print(f"  end_time: {end_time}")
+#    # ----------------
+    
+#    conn = sqlite3.connect(db)
+#    cursor = conn.cursor()
+
+#    # ... (中间的 SQL 构建代码保持不变) ...
+#    # 1. 构建基础 SQL 查询
+#    query = "SELECT * FROM flights WHERE 1=1"
+#    params = []
+
+#    # 2. 动态添加精确查询条件
+#    if departure_airport:
+#        query += " AND departure_airport = ?"
+#        params.append(departure_airport)
+#    
+#    if arrival_airport:
+#        query += " AND arrival_airport = ?"
+#        params.append(arrival_airport)
+        
+#    if start_time:
+#        # 如果只提供了日期 (YYYY-MM-DD)，自动补全时间范围
+#        if len(start_time) == 10: 
+#            query += " AND scheduled_departure >= ?"
+#            params.append(f"{start_time} 00:00:00")
+#        else:
+#            query += " AND scheduled_departure >= ?"
+#            params.append(start_time)
+        
+#    if end_time:
+#        if len(end_time) == 10:
+#            query += " AND scheduled_departure <= ?"
+#            params.append(f"{end_time} 23:59:59")
+#        else:
+#            query += " AND scheduled_departure <= ?"
+#            params.append(end_time)
+
+#    query += f" ORDER BY scheduled_departure ASC LIMIT {limit}"
+    
+#    # --- 调试打印 SQL ---
+#    print(f"[DEBUG] SQL Query: {query}")
+#    print(f"[DEBUG] SQL Params: {params}")
+#    # --------------------
+
+#    try:
+#        cursor.execute(query, params)
+#        rows = cursor.fetchall()
+#        column_names = [column[0] for column in cursor.description]
+#        results = [dict(zip(column_names, row)) for row in rows]
+        
+#        # --- 调试打印结果数量 ---
+#        print(f"[DEBUG] Found {len(results)} flights.")
+#        # ----------------------
+        
+#    except Exception as e:
+#        print(f"[DEBUG] SQL Error: {e}")
+#        return [{"error": f"Database query failed: {str(e)}"}]
+#    finally:
+#        conn.close()
+    
+#    if not results:
+#        return [{"message": "No flights found matching your criteria."}]
+
+#    return results
+# ...existing code...
+
 
 @tool
 @humanloop_adapter.require_approval(execute_on_reject=False)

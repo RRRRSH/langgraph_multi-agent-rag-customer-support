@@ -1,1 +1,4 @@
 .env
+/user_data/
+/tmp/
+*.log

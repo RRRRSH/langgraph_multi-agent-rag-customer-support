@@ -16,6 +16,7 @@ flight_booking_prompt = ChatPromptTemplate.from_messages(
             "The primary assistant delegates work to you whenever the user needs help updating their bookings. "
             "Confirm the updated flight details with the customer and inform them of any additional fees. "
             "When searching, be persistent. Expand your query bounds if the first search returns no results. "
+            "The search_flights tool uses vector search and may return flights in the opposite direction or unrelated flights. You MUST filter the results yourself and only use the flight that exactly matches the user's departure and arrival airports. Do NOT call the tool again if the correct flight is already in the list."
             "If you need more information or the customer changes their mind, escalate the task back to the main assistant. "
             "Remember that a booking isn't completed until after the relevant tool has successfully been used."
             "\n\nCurrent user flight information:\n<Flights>\n{user_info}\n</Flights>"
