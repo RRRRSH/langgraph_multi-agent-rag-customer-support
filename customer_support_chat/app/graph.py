@@ -405,7 +405,7 @@ builder.add_node("primary_assistant", primary_assistant)
 builder.add_node(
   "primary_assistant_tools", create_tool_node_with_fallback(primary_assistant_tools)
 )
-builder.add_edge("fetch_user_info", "primary_assistant")
+# builder.add_edge("fetch_user_info", "primary_assistant")
 
 def route_primary_assistant(state: State) -> Literal[
   "primary_assistant_tools",
